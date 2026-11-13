@@ -1,0 +1,27 @@
+workflow:
+  name: "production-development"
+  version: "1.0.0"
+  trigger:
+    type: "user-request"
+  stages:
+    - id: "analysis"
+      action: "project-analysis"
+      required: true
+    - id: "planning"
+      action: "implementation-planning"
+      depends_on:
+        - "analysis"
+    - id: "development"
+      action: "implementation"
+      depends_on:
+        - "planning"
+    - id: "testing"
+      action: "automated-testing"
+      depends_on:
+        - "development"
+    - id: "verification"
+      action: "result-verification"
+      depends_on:
+        - "testing"
+  completion:
+    require_all_stages: true

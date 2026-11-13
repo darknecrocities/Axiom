@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axiom.dev/schemas/skill/v0.1.json",
+  "title": "Axiom Skill Manifest v0.1",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "skill": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "version": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "compatibility": {
+          "type": "object",
+          "properties": { "adl": { "type": "string" } }
+        },
+        "requirements": {
+          "type": "object",
+          "properties": {
+            "capabilities": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "loading": {
+          "type": "object",
+          "properties": {
+            "mode": { "enum": ["progressive", "eager", "lazy"] },
+            "strategy": { "enum": ["progressive", "eager", "lazy"] }
+          }
+        },
+        "entrypoint": { "type": "string" },
+        "references": { "type": "array", "items": { "type": "string" } },
+        "validation": {
+          "type": "object",
+          "properties": { "command": { "type": "string" } }
+        }
+      },
+      "required": ["name", "version"]
+    }
+  },
+  "required": ["skill"]
+}

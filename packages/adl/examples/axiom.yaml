@@ -1,0 +1,109 @@
+axiom:
+  version: "0.1"
+  specification: "adl/v1"
+
+project:
+  name: "example-project"
+  type: "web-application"
+
+agent:
+  name: "principal-engineer"
+  identity:
+    role: "Principal Software Engineer"
+    responsibilities:
+      - architecture
+      - implementation
+      - code-review
+    objectives:
+      - maintainability
+      - reliability
+      - security
+
+capabilities:
+  required:
+    - software-development
+    - project-analysis
+  optional:
+    - performance-optimization
+  constraints:
+    - no-unverified-deployment
+
+skills:
+  include:
+    - frontend-engineering
+    - backend-engineering
+    - testing
+  discovery:
+    enabled: true
+    directories:
+      - "./skills"
+      - "./.axiom/skills"
+  loading:
+    strategy: progressive
+
+presets:
+  active:
+    - production-engineering
+  overrides:
+    require_testing: true
+
+workflows:
+  active:
+    - production-development
+  execution:
+    require_plan: true
+    require_verification: true
+
+policies:
+  engineering:
+    no_fake_database_records: true
+    require_modular_architecture: true
+    prohibit_dead_code: true
+  testing:
+    require_unit_tests: true
+  security:
+    prohibit_secret_exposure: true
+
+tools:
+  filesystem:
+    enabled: true
+    read:
+      - "./src/**"
+      - "./docs/**"
+    write:
+      - "./src/**"
+  terminal:
+    enabled: true
+    allow:
+      - "npm test"
+      - "npm run build"
+  git:
+    enabled: true
+  mcp:
+    enabled: true
+    servers:
+      - documentation-server
+
+context:
+  sources:
+    - "./README.md"
+    - "./docs/architecture.md"
+  discovery:
+    inspect_project_structure: true
+    detect_technology_stack: true
+  persistence:
+    enabled: true
+    location: "./.axiom/context"
+
+verification:
+  required:
+    - tests
+    - build
+    - lint
+  evidence:
+    command_results: true
+    test_results: true
+    changed_files: true
+  completion:
+    require_verified_results: true
+    allow_unverified_claims: false

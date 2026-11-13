@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axiom.dev/schemas/workflow/v0.1.json",
+  "title": "Axiom Workflow Manifest v0.1",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "workflow": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "version": { "type": "string" },
+        "trigger": { "type": "object" },
+        "stages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "action": { "type": "string" },
+              "required": { "type": "boolean" },
+              "depends_on": { "type": "array", "items": { "type": "string" } }
+            },
+            "required": ["id", "action"]
+          }
+        },
+        "completion": { "type": "object" }
+      },
+      "required": ["name", "version", "stages"]
+    }
+  },
+  "required": ["workflow"]
+}

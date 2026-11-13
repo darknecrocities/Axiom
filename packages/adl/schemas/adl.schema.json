@@ -1,0 +1,251 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axiom.dev/schemas/adl/v0.1.json",
+  "title": "Axiom Agent Definition Language v0.1",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "axiom": {
+      "type": "object",
+      "properties": {
+        "version": { "type": "string", "pattern": "^0\\.1(\\.0)?$" },
+        "specification": { "type": "string", "pattern": "^adl/v[0-9]+$" }
+      },
+      "required": ["version"]
+    },
+    "project": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "type": { "type": "string" },
+        "description": { "type": "string" },
+        "root": { "type": "string" }
+      },
+      "required": ["name"]
+    },
+    "agent": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "version": { "type": "string" },
+        "description": { "type": "string" },
+        "identity": { "$ref": "#/$defs/agentIdentity" },
+        "capabilities": { "$ref": "#/$defs/agentCapabilities" }
+      },
+      "required": ["name"]
+    },
+    "identity": { "$ref": "#/$defs/agentIdentity" },
+    "capabilities": { "$ref": "#/$defs/agentCapabilities" },
+    "skills": { "$ref": "#/$defs/skillsBlock" },
+    "presets": { "$ref": "#/$defs/presetsBlock" },
+    "profiles": { "$ref": "#/$defs/profilesBlock" },
+    "workflows": { "$ref": "#/$defs/workflowsBlock" },
+    "policies": { "$ref": "#/$defs/policiesBlock" },
+    "tools": { "$ref": "#/$defs/toolsBlock" },
+    "context": { "$ref": "#/$defs/contextBlock" },
+    "memory": { "$ref": "#/$defs/memoryBlock" },
+    "execution": { "$ref": "#/$defs/executionBlock" },
+    "verification": { "$ref": "#/$defs/verificationBlock" }
+  },
+  "$defs": {
+    "agentIdentity": {
+      "type": "object",
+      "properties": {
+        "role": { "type": "string" },
+        "responsibilities": { "type": "array", "items": { "type": "string" } },
+        "objectives": { "type": "array", "items": { "type": "string" } },
+        "boundaries": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "agentCapabilities": {
+      "type": "object",
+      "properties": {
+        "required": { "type": "array", "items": { "type": "string" } },
+        "optional": { "type": "array", "items": { "type": "string" } },
+        "constraints": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "skillsBlock": {
+      "type": "object",
+      "properties": {
+        "include": { "type": "array", "items": { "type": "string" } },
+        "exclude": { "type": "array", "items": { "type": "string" } },
+        "discovery": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "directories": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "loading": {
+          "type": "object",
+          "properties": {
+            "strategy": { "enum": ["progressive", "eager", "lazy"] },
+            "mode": { "enum": ["progressive", "eager", "lazy"] }
+          }
+        }
+      }
+    },
+    "presetsBlock": {
+      "type": "object",
+      "properties": {
+        "active": { "type": "array", "items": { "type": "string" } },
+        "overrides": { "type": "object" }
+      }
+    },
+    "profilesBlock": {
+      "type": "object",
+      "properties": {
+        "active": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "workflowStage": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "action": { "type": "string", "minLength": 1 },
+        "required": { "type": "boolean" },
+        "depends_on": { "type": "array", "items": { "type": "string" } },
+        "condition": { "type": "string" },
+        "retry": { "type": "integer", "minimum": 0 }
+      },
+      "required": ["id", "action"]
+    },
+    "workflowsBlock": {
+      "type": "object",
+      "properties": {
+        "active": { "type": "array", "items": { "type": "string" } },
+        "execution": {
+          "type": "object",
+          "properties": {
+            "require_plan": { "type": "boolean" },
+            "require_verification": { "type": "boolean" },
+            "parallel": { "type": "boolean" }
+          }
+        },
+        "definitions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "version": { "type": "string" },
+              "trigger": { "type": "object" },
+              "stages": { "type": "array", "items": { "$ref": "#/$defs/workflowStage" } },
+              "completion": { "type": "object" }
+            },
+            "required": ["name", "stages"]
+          }
+        }
+      }
+    },
+    "policiesBlock": {
+      "type": "object",
+      "properties": {
+        "engineering": { "type": "object" },
+        "testing": { "type": "object" },
+        "security": { "type": "object" },
+        "custom": { "type": "object" }
+      }
+    },
+    "toolsBlock": {
+      "type": "object",
+      "properties": {
+        "filesystem": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "read": { "type": "array", "items": { "type": "string" } },
+            "write": { "type": "array", "items": { "type": "string" } },
+            "permissions": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "terminal": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "permissions": { "type": "array", "items": { "type": "string" } },
+            "allow": { "type": "array", "items": { "type": "string" } },
+            "deny": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "git": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "permissions": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "mcp": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "servers": { "type": "array" }
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "contextBlock": {
+      "type": "object",
+      "properties": {
+        "sources": { "type": "array", "items": { "type": "string" } },
+        "discovery": {
+          "type": "object",
+          "properties": {
+            "inspect_project_structure": { "type": "boolean" },
+            "detect_technology_stack": { "type": "boolean" },
+            "identify_existing_patterns": { "type": "boolean" }
+          }
+        },
+        "persistence": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "location": { "type": "string" }
+          }
+        }
+      }
+    },
+    "memoryBlock": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "location": { "type": "string" },
+        "retention": { "type": "string" },
+        "categories": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "executionBlock": {
+      "type": "object",
+      "properties": {
+        "mode": { "enum": ["interactive", "autonomous", "supervised"] },
+        "timeout": { "type": "number" },
+        "max_retries": { "type": "integer", "minimum": 0 },
+        "checkpoints": { "type": "boolean" }
+      }
+    },
+    "verificationBlock": {
+      "type": "object",
+      "properties": {
+        "required": { "type": "array", "items": { "type": "string" } },
+        "evidence": {
+          "type": "object",
+          "properties": {
+            "command_results": { "type": "boolean" },
+            "test_results": { "type": "boolean" },
+            "changed_files": { "type": "boolean" },
+            "logs": { "type": "boolean" }
+          }
+        },
+        "completion": {
+          "type": "object",
+          "properties": {
+            "require_verified_results": { "type": "boolean" },
+            "allow_unverified_claims": { "type": "boolean" }
+          }
+        }
+      }
+    }
+  }
+}

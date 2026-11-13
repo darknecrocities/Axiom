@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axiom.dev/schemas/package/v0.1.json",
+  "title": "Axiom Package Manifest v0.1",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "package": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "version": { "type": "string" },
+        "description": { "type": "string" },
+        "type": { "enum": ["skill", "preset", "profile", "workflow", "tool", "policy", "template", "agent"] },
+        "author": { "type": "string" },
+        "license": { "type": "string" },
+        "compatibility": { "type": "object" },
+        "entrypoint": { "type": "string" },
+        "dependencies": { "type": "array", "items": { "type": "string" } },
+        "integrity": { "type": "object" }
+      },
+      "required": ["name", "version", "type"]
+    }
+  },
+  "required": ["package"]
+}

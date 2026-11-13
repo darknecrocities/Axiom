@@ -1,0 +1,15 @@
+skill:
+  name: "testing"
+  version: "1.0.0"
+  description: "Automated testing strategy and implementation."
+  category: "quality-engineering"
+  compatibility:
+    adl: ">=0.1"
+  requirements:
+    capabilities:
+      - filesystem-read
+      - filesystem-write
+      - terminal
+  loading:
+    mode: "progressive"
+  entrypoint: "SKILL.md"

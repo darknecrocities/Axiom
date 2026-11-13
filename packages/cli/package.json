@@ -1,0 +1,25 @@
+{
+  "name": "@axiom/cli",
+  "version": "0.1.0",
+  "description": "Axiom CLI",
+  "type": "module",
+  "bin": {
+    "axiom": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@axiom/adl": "workspace:*",
+    "@axiom/core": "workspace:*",
+    "commander": "^12.1.0",
+    "yaml": "^2.6.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  }
+}

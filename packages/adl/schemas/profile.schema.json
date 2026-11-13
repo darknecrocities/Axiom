@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axiom.dev/schemas/profile/v0.1.json",
+  "title": "Axiom Agent Profile Manifest v0.1",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "profile": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "version": { "type": "string" },
+        "description": { "type": "string" },
+        "presets": { "type": "array", "items": { "type": "string" } },
+        "skills": { "type": "array", "items": { "type": "string" } },
+        "workflows": { "type": "array", "items": { "type": "string" } },
+        "tools": { "type": "object" }
+      },
+      "required": ["name", "version"]
+    }
+  },
+  "required": ["profile"]
+}

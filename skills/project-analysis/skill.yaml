@@ -1,0 +1,13 @@
+skill:
+  name: "project-analysis"
+  version: "1.0.0"
+  description: "Analyze project structure, stack, and conventions."
+  category: "software-development"
+  compatibility:
+    adl: ">=0.1"
+  requirements:
+    capabilities:
+      - filesystem-read
+  loading:
+    mode: "progressive"
+  entrypoint: "SKILL.md"

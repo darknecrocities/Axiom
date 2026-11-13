@@ -1,0 +1,23 @@
+axiom:
+  version: "0.1"
+  specification: "adl/v1"
+
+project:
+  name: "minimal-example"
+  type: "library"
+
+agent:
+  name: "assistant"
+  identity:
+    role: "Software Engineer"
+
+skills:
+  include:
+    - compact
+
+verification:
+  required:
+    - tests
+  completion:
+    require_verified_results: true
+    allow_unverified_claims: false

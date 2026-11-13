@@ -1,0 +1,18 @@
+profile:
+  name: "fullstack-production"
+  version: "1.0.0"
+  description: "Full-stack production engineering environment."
+  presets:
+    - production-engineering
+    - security-first
+  skills:
+    - frontend-engineering
+    - backend-engineering
+    - database-design
+    - testing
+    - security-auditing
+    - project-analysis
+    - compact
+  workflows:
+    - fullstack-development
+    - release-validation

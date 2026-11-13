@@ -1,0 +1,24 @@
+{
+  "name": "axiom",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Agent-native development framework & language",
+  "scripts": {
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "pnpm -r lint"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6"
+  }
+}

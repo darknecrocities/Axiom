@@ -1,0 +1,14 @@
+skill:
+  name: "security-auditing"
+  version: "1.0.0"
+  description: "Application security review and threat analysis."
+  category: "security"
+  compatibility:
+    adl: ">=0.1"
+  requirements:
+    capabilities:
+      - filesystem-read
+      - terminal
+  loading:
+    mode: "progressive"
+  entrypoint: "SKILL.md"

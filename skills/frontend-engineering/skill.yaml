@@ -1,0 +1,14 @@
+skill:
+  name: "frontend-engineering"
+  version: "1.0.0"
+  description: "Production-grade frontend engineering and component architecture."
+  category: "software-development"
+  compatibility:
+    adl: ">=0.1"
+  requirements:
+    capabilities:
+      - filesystem-read
+      - filesystem-write
+  loading:
+    mode: "progressive"
+  entrypoint: "SKILL.md"

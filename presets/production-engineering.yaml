@@ -1,0 +1,23 @@
+preset:
+  name: "production-engineering"
+  version: "1.0.0"
+  description: "Engineering standards for production-ready applications."
+  policies:
+    architecture:
+      enforce_modularity: true
+      require_separation_of_concerns: true
+    implementation:
+      prohibit_fake_data: true
+      prohibit_dead_code: true
+    quality:
+      require_tests: true
+      require_build_validation: true
+    documentation:
+      require_api_documentation: true
+  workflows:
+    - project-analysis
+    - implementation
+    - quality-assurance
+  skills:
+    - project-analysis
+    - testing

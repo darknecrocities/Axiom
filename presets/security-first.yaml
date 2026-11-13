@@ -1,0 +1,11 @@
+preset:
+  name: "security-first"
+  version: "1.0.0"
+  description: "Security-first engineering standards."
+  policies:
+    security:
+      prohibit_secret_exposure: true
+      require_permission_checks: true
+      require_dependency_audit: true
+  skills:
+    - security-auditing

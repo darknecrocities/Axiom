@@ -1,0 +1,19 @@
+skill:
+  name: "compact"
+  version: "1.0.0"
+  description: >
+    Minimize token usage while preserving task-critical information.
+    Use when context is large, costs matter, or responses must be terse.
+  category: "efficiency"
+  compatibility:
+    adl: ">=0.1"
+  requirements:
+    capabilities:
+      - filesystem-read
+  loading:
+    mode: "progressive"
+  entrypoint: "SKILL.md"
+  references:
+    - "references/techniques.md"
+  validation:
+    command: "true"

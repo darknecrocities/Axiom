@@ -12,6 +12,7 @@ profile:
     - testing
     - security-auditing
     - project-analysis
+    - performance-optimization
     - compact
   workflows:
     - fullstack-development

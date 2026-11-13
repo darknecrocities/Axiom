@@ -1,0 +1,16 @@
+skill:
+  name: "performance-optimization"
+  version: "1.0.0"
+  description: "Performance profiling, optimization, and benchmarking."
+  category: "software-development"
+  compatibility:
+    adl: ">=0.1"
+  requirements:
+    capabilities:
+      - filesystem-read
+      - terminal
+  loading:
+    mode: "progressive"
+  entrypoint: "SKILL.md"
+  references:
+    - "references/checklist.md"

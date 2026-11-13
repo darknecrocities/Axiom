@@ -1,0 +1,11 @@
+preset:
+  name: "performance-first"
+  version: "1.0.0"
+  description: "Performance-focused engineering standards."
+  policies:
+    quality:
+      require_benchmarks: true
+      require_performance_tests: true
+  skills:
+    - performance-optimization
+    - testing
